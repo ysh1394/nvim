@@ -6,7 +6,7 @@
 " ██║██║ ╚████║██║   ██║██╗ ╚████╔╝ ██║██║ ╚═╝ ██║
 " ╚═╝╚═╝  ╚═══╝╚═╝   ╚═╝╚═╝  ╚═══╝  ╚═╝╚═╝     ╚═╝
 " 
-"         @elijahmanor
+"         @ysh1394
 
 " Sets {{{
 set exrc
@@ -192,7 +192,7 @@ EOF
   let g:lazygit_floating_window_use_plenary = 0 " use plenary.nvim to manage floating window if available
   let g:lazygit_use_neovim_remote = 1 " fallback to 0 if neovim-remote is not installed
 
-  nnoremap <silent> <leader>G :LazyGit<CR>
+  nnoremap <silent>lg :LazyGit<CR>
 " }}}
 
 " Colors {{{
@@ -515,7 +515,7 @@ require('telescope').setup {
     }
   }
 }
--- require('telescope').load_extension('fzf') -- 에러로 인한 주석  처리
+require('telescope').load_extension('fzf') -- 에러로 인한 주석  처리
 EOF
 nnoremap <leader>ps :lua require('telescope.builtin').grep_string( { search = vim.fn.input("Grep for > ") } )<cr>
 nnoremap <leader>fd :lua require'telescope.builtin'.find_files{ hidden = true, file_ignore_patterns = { '**/*.spec.js' } }<cr>
