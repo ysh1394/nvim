@@ -515,7 +515,8 @@ require('telescope').setup {
     }
   }
 }
-require('telescope').load_extension('fzf') -- 에러로 인한 주석  처리
+-- require('telescope').load_extension('fzf') -- 에러로 인한 주석  처리
+require('telescope').load_extension('') 
 EOF
 nnoremap <leader>ps :lua require('telescope.builtin').grep_string( { search = vim.fn.input("Grep for > ") } )<cr>
 nnoremap <leader>fd :lua require'telescope.builtin'.find_files{ hidden = true, file_ignore_patterns = { '**/*.spec.js' } }<cr>
