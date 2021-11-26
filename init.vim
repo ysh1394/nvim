@@ -1,4 +1,4 @@
-"        
+"
 " ██╗███╗   ██╗██╗████████╗██╗   ██╗██╗███╗   ███╗
 " ██║████╗  ██║██║╚══██╔══╝██║   ██║██║████╗ ████║
 " ██║██╔██╗ ██║██║   ██║   ██║   ██║██║██╔████╔██║
@@ -143,11 +143,12 @@ Plug 'tpope/vim-fugitive'
 Plug 'editorconfig/editorconfig-vim'
 " Plug 'APZelos/blamer.nvim'
 Plug 'lewis6991/gitsigns.nvim'
-Plug 'karb94/neoscroll.nvim'
+" Plug 'karb94/neoscroll.nvim'
 Plug 'vimwiki/vimwiki', { 'on': ['VimwikiIndex'] }
 Plug 'norcalli/nvim-colorizer.lua', { 'branch': 'color-editor' }
 Plug 'machakann/vim-highlightedyank'
 " Plug 'folke/which-key.nvim'
+Plug 'liuchengxu/vim-which-key'
 Plug 'wesQ3/vim-windowswap' " <leader>ww
 Plug 'justinmk/vim-sneak'
 " Plug 'tweekmonster/startuptime.vim'
@@ -177,12 +178,12 @@ call plug#end()
 
 nnoremap <silent> <leader>code <cmd>lua require('export-to-vscode').launch()<cr>
 lua << EOF
---vim.api.nvim_set_keymap(
---  'n',
---  '<leader>code',
---  '<cmd>lua require("export-to-vscode").launch()<cr>',
---  { noremap = true, silent = true }
---)
+-- vim.api.nvim_set_keymap(
+--   'n',
+--   '<leader>code',
+--   '<cmd>lua require("export-to-vscode").launch()<!-- <cr> -->',
+--   { noremap = true, silent = true }
+-- )
 EOF
 
 " Git {{{
@@ -192,7 +193,7 @@ EOF
   let g:lazygit_floating_window_use_plenary = 0 " use plenary.nvim to manage floating window if available
   let g:lazygit_use_neovim_remote = 1 " fallback to 0 if neovim-remote is not installed
 
-  nnoremap <silent>lg :LazyGit<CR>
+  nnoremap lg :LazyGit<CR>
 " }}}
 
 " Colors {{{
@@ -316,6 +317,15 @@ require("bufferline").setup{
 }
 EOF
 nnoremap <silent> gb :BufferLinePick<CR>
+nnoremap <silent><leader>1 <Cmd>BufferLineGoToBuffer 1<CR>
+nnoremap <silent><leader>2 <Cmd>BufferLineGoToBuffer 2<CR>
+nnoremap <silent><leader>3 <Cmd>BufferLineGoToBuffer 3<CR>
+nnoremap <silent><leader>4 <Cmd>BufferLineGoToBuffer 4<CR>
+nnoremap <silent><leader>5 <Cmd>BufferLineGoToBuffer 5<CR>
+nnoremap <silent><leader>6 <Cmd>BufferLineGoToBuffer 6<CR>
+nnoremap <silent><leader>7 <Cmd>BufferLineGoToBuffer 7<CR>
+nnoremap <silent><leader>8 <Cmd>BufferLineGoToBuffer 8<CR>
+nnoremap <silent><leader>9 <Cmd>BufferLineGoToBuffer 9<CR>
 " }}}
 
 " Plug 'APZelos/blamer.nvim' {{{
@@ -334,7 +344,7 @@ EOF
 " }}}
 
 " Plug 'karb94/neoscroll.nvim'{{{
-lua require('neoscroll').setup()
+" lua require('neoscroll').setup()
 " }}}
 
 " neovim/nvim-lspconfig {{{
@@ -411,10 +421,10 @@ dlsconfig.setup {
 }
 EOF
 
-nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> gh    <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> gca   <cmd>:Telescope lsp_code_actions<CR>
-nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent><leader>gd    <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent><leader>gh    <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent><leader>gca   <cmd>:Telescope lsp_code_actions<CR>
+nnoremap <silent>gD    <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> gR    <cmd>lua vim.lsp.buf.rename()<CR>
@@ -472,19 +482,91 @@ EOF
 " }}}
 
 " ThePrimeagen/harpoon {{{
-nnoremap <leader>a :lua require("harpoon.mark").add_file()<CR>
-nnoremap <C-e> :lua require("harpoon.ui").toggle_quick_menu()<CR>
-nnoremap <C-y> :lua require("harpoon.cmd-ui").toggle_quick_menu()<CR>
-nnoremap <leader>1 :lua require("harpoon.ui").nav_file(1)<CR>
-nnoremap <leader>2 :lua require("harpoon.ui").nav_file(2)<CR>
-nnoremap <leader>3 :lua require("harpoon.ui").nav_file(3)<CR>
-nnoremap <leader>4 :lua require("harpoon.ui").nav_file(4)<CR>
+" nnoremap <leader>a :lua require("harpoon.mark").add_file()<CR>
+" nnoremap <C-e> :lua require("harpoon.ui").toggle_quick_menu()<CR>
+" nnoremap <C-y> :lua require("harpoon.cmd-ui").toggle_quick_menu()<CR>
+" nnoremap <leader>1 :lua require("harpoon.ui").nav_file(1)<CR>
+" nnoremap <leader>2 :lua require("harpoon.ui").nav_file(2)<CR>
+" nnoremap <leader>3 :lua require("harpoon.ui").nav_file(3)<CR>
+" nnoremap <leader>4 :lua require("harpoon.ui").nav_file(4)<CR>
 " }}}
 
 " folke/wich-key.nvim {{{
 lua << EOF
 -- require("which-key").setup {}
 EOF
+" }}}
+
+" liuchengxu/vim-which-key {{{
+  " Map leader to which_key
+nnoremap <silent> <leader> :silent WhichKey '<Space>'<CR>
+nnoremap <silent> \ :silent WhichKey ''<CR>
+nnoremap <silent> <C-s> :silent WhichKey '<C>'<CR>
+vnoremap <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
+
+" Create map to add keys to
+let g:which_key_map =  {}
+" Define a separator
+let g:which_key_sep = '→'
+" set timeoutlen=100
+
+" Not a fan of floating windows for this
+let g:which_key_use_floating_win = 0
+
+" Change the colors if you want
+highlight default link WhichKey          Operator
+highlight default link WhichKeySeperator DiffAdded
+highlight default link WhichKeyGroup     Identifier
+highlight default link WhichKeyDesc      Function
+
+" Hide status line
+autocmd! FileType which_key
+autocmd  FileType which_key set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
+
+" Single mappings
+" let g:which_key_map['/'] = [ '<Plug>NERDCommenterToggle'  , 'comment' ]
+" let g:which_key_map['e'] = [ ':CocCommand explorer'       , 'explorer' ]
+" let g:which_key_map['f'] = [ ':Files'                     , 'search files' ]
+" let g:which_key_map['h'] = [ '<C-W>s'                     , 'split below']
+" let g:which_key_map['r'] = [ ':Ranger'                    , 'ranger' ]
+" let g:which_key_map['S'] = [ ':Startify'                  , 'start screen' ]
+" let g:which_key_map['T'] = [ ':Rg'                        , 'search text' ]
+" let g:which_key_map['v'] = [ '<C-W>v'                     , 'split right']
+" let g:which_key_map['z'] = [ 'Goyo'                       , 'zen' ]
+let g:which_key_map['q'] = [ '<Esc>'  , 'exit' ]
+
+" s is for search
+let g:which_key_map.s = {
+      \ 'name' : '+search' ,
+      \ '/' : [':History/'     , 'history'],
+      \ ';' : [':Commands'     , 'commands'],
+      \ 'a' : [':Ag'           , 'text Ag'],
+      \ 'b' : [':BLines'       , 'current buffer'],
+      \ 'B' : [':Buffers'      , 'open buffers'],
+      \ 'c' : [':Commits'      , 'commits'],
+      \ 'C' : [':BCommits'     , 'buffer commits'],
+      \ 'f' : [':Files'        , 'files'],
+      \ 'g' : [':GFiles'       , 'git files'],
+      \ 'G' : [':GFiles?'      , 'modified git files'],
+      \ 'h' : [':History'      , 'file history'],
+      \ 'H' : [':History:'     , 'command history'],
+      \ 'l' : [':Lines'        , 'lines'] ,
+      \ 'm' : [':Marks'        , 'marks'] ,
+      \ 'M' : [':Maps'         , 'normal maps'] ,
+      \ 'p' : [':Helptags'     , 'help tags'] ,
+      \ 'P' : [':Tags'         , 'project tags'],
+      \ 's' : [':Snippets'     , 'snippets'],
+      \ 'S' : [':Colors'       , 'color schemes'],
+      \ 't' : [':Rg'           , 'text Rg'],
+      \ 'T' : [':BTags'        , 'buffer tags'],
+      \ 'w' : [':Windows'      , 'search windows'],
+      \ 'y' : [':Filetypes'    , 'file types'],
+      \ 'z' : [':FZF'          , 'FZF'],
+      \ }
+
+" Register which key map
+call which_key#register('<Space>', "g:which_key_map")
 " }}}
 
 " nvim-telescope/telescope.nvim {{{
@@ -578,16 +660,16 @@ lua <<EOF
       end,
     },
     mapping = {
-      ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    --  ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    --  ['<C-f>'] = cmp.mapping.scroll_docs(4),
       -- ['<C-Space>'] = cmp.mapping.complete(), 
-      ['<C-x>'] = cmp.mapping.complete(),
-      ['<C-e>'] = cmp.mapping.close(),
+    --  ['<C-x>'] = cmp.mapping.complete(),
+  --    ['<C-e>'] = cmp.mapping.close(),
       --['<CR>'] = cmp.mapping.confirm({ select = false }),
-      ['<C-y>'] = cmp.mapping.confirm({
-        behavior = cmp.ConfirmBehavior.Insert,        
-        select = true
-      }),
+--       ['<C-y>'] = cmp.mapping.confirm({
+--         behavior = cmp.ConfirmBehavior.Insert,        
+--         select = true
+--       }),
     },
     sources = {
       { name = 'nvim_lsp' },
@@ -633,6 +715,11 @@ require'nvim-treesitter.configs'.setup {
   },
   context_commentstring = {
     enable = true
+  },
+  rainbow = {
+    enable = true,
+    expended_mode = true,
+    max_file_lines = nil,
   }
 }
 EOF
